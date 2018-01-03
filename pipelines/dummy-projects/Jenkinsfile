@@ -8,8 +8,7 @@ pipeline {
     stages {
         stage('Build NodeJS') { 
             steps {
-                sh("pwd && \
-                    rm -rf dummy-nodejs-project && \
+                sh("rm -rf dummy-nodejs-project && \
                     git clone https://github.com/rms1000watt/dummy-nodejs-project.git && \
                     cd dummy-nodejs-project && \
                     ./build.sh")
@@ -17,7 +16,10 @@ pipeline {
         }
         stage('Build Golang') { 
             steps {
-                sh("pwd")
+                sh("rm -rf dummy-golang-project && \
+                    git clone https://github.com/rms1000watt/dummy-golang-project.git && \
+                    cd dummy-golang-project && \
+                    ./build.sh")
             }
         }
         stage('Test') { 

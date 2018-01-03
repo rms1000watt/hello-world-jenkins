@@ -10,7 +10,7 @@ pipeline {
         new File('dummy-nodejs-project').mkdir()
     }
     dir ('dummy-nodejs-project') {
-        git branch: "<ref spec>", changelog: false, poll: false, url: 'https://github.com/rms1000watt/dummy-nodejs-project.git'
+        git branch: "master", changelog: false, poll: false, url: 'https://github.com/rms1000watt/dummy-nodejs-project.git'
     }
     stages {
         stage('Build') { 

@@ -12,6 +12,8 @@ Hello World to Jenkins in Docker with pipelines
 
 ## Build
 
+Build the specialized Jenkins docker image (with docker bin)
+
 ```bash
 docker build  --force-rm --no-cache --compress -t rms1000watt/jenkins-docker:latest .
 ```

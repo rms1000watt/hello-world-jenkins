@@ -5,10 +5,13 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock --rm'
         }
     }
+    git {
+        changelog: false, poll: false, url: 'https://github.com/rms1000watt/dummy-nodejs-project.git'
+    }
     stages {
         stage('Github') {
             steps {
-                git 'clone https://github.com/rms1000watt/dummy-nodejs-project.git'
+                // git 'clone https://github.com/rms1000watt/dummy-nodejs-project.git'
                 cd dummy-nodejs-project
             }
         }

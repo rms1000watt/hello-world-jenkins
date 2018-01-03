@@ -5,7 +5,7 @@ pipeline {
     //         args '-v /var/run/docker.sock:/var/run/docker.sock'
     //     }
     // }
-    agent
+    agent none
     stages {
         stage('Build') { 
             steps {

@@ -8,11 +8,11 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh("rm -rf dummy-nodejs-project &> /dev/null")
+                sh("rm -rf dummy-nodejs-project")
                 sh("git clone https://github.com/rms1000watt/dummy-nodejs-project.git")
-                cd dummy-nodejs-project
-                sh("ls -la")
-                echo 'Building Done'
+                sh("cd dummy-nodejs-project && \
+                    ls -la && \
+                    echo 'Building done'")
             }
         }
         stage('Test') { 

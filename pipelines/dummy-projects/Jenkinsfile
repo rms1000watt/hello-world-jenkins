@@ -2,13 +2,20 @@ pipeline {
     agent {
         docker {
             image 'docker:latest'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /var/run/docker.sock:/var/run/docker.sock --rm'
         }
     }
     // agent none
     stages {
+        stage('Github') {
+            steps {
+                git clone https://github.com/rms1000watt/dummy-nodejs-project.git
+                cd dummy-nodejs-project
+            }
+        }
         stage('Build') { 
             steps {
+                ls -la
                 echo 'Building Done'
             }
         }

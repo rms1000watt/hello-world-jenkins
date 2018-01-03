@@ -8,13 +8,13 @@ pipeline {
     stages {
         stage('Github') {
             steps {
-                git clone "https://github.com/rms1000watt/dummy-nodejs-project.git"
+                git 'clone https://github.com/rms1000watt/dummy-nodejs-project.git'
                 cd dummy-nodejs-project
             }
         }
         stage('Build') { 
             steps {
-                ls -la
+                ls '-la'
                 echo 'Building Done'
             }
         }

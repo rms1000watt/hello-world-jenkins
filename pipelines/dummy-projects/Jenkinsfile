@@ -1,7 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'docker:17.12.0-ce-git'
+            // image 'docker:17.12.0-ce-git'
+            image 'amidos/dcind:latest'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
@@ -22,9 +23,24 @@ pipeline {
                     ./build.sh")
             }
         }
-        stage('Test') { 
+        stage('Integration Test') { 
             steps {
-                echo 'Testing Done'
+                sh("rm -rf dummy-projects-integration && \
+                    git clone https://github.com/rms1000watt/dummy-projects-integration.git && \
+                    cd dummy-projects-integration && \
+                    source /docker-lib.sh && \
+                    start_docker && \
+                    cat docker-compose.yml && \
+                    docker-compose up -d && \
+                    docker images && \
+                    docker ps && \
+                    ./test.sh")
+            }
+        }
+        stage('Push Containers') {
+            steps {
+                sh("docker push rms1000watt/dummy-nodejs-project:latest && \
+                    docker push rms1000watt/dummy-golang-project:latest")
             }
         }
     }

@@ -30,10 +30,12 @@ pipeline {
                     source /docker-lib.sh && \
                     start_docker && \
                     cat docker-compose.yml && \
+                    docker-compose down && \
                     docker-compose up -d && \
                     docker images && \
                     docker ps && \
-                    ./test.sh")
+                    ./test.sh && \
+                    docker-compose down")
             }
         }
         stage('Push Containers') {

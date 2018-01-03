@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh("rm -rf dummy-nodejs-project")
+                sh("rm -rf dummy-nodejs-project2")
                 sh("git clone https://github.com/rms1000watt/dummy-nodejs-project.git")
                 sh("cd dummy-nodejs-project && \
                     ls -la && \

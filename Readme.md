@@ -6,8 +6,15 @@ Hello World to Jenkins in Docker with pipelines
 
 ## Contents
 
+- [Build](#build)
 - [Usage](#usage)
 - [CLI](#cli)
+
+## Build
+
+```bash
+docker build  --force-rm --no-cache --compress -t rms1000watt/jenkins-docker:latest .
+```
 
 ## Usage
 
@@ -21,6 +28,16 @@ open http://localhost:8080/
 
 - Go through the UI and allow for cli usage
 - Get the token for the admin user so you can use it in the auth later
+
+### Create a Pipeline
+- Create a pipeline
+- Name it
+- Definition: `Pipeline script from SCM`
+- SCM: `Git`
+- Repositories: 
+- Repository URL: `https://github.com/rms1000watt/hello-world-jenkins`
+- Script Path: `pipelines/dummy-projects/Jenkinsfile`
+- Save
 
 
 ## CLI

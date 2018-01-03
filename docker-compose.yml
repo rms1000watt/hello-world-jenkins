@@ -2,7 +2,6 @@ version: '3'
 services:
   jenkins:
     container_name: jenkins
-    # image: jenkins/jenkins:lts-alpine
     image: rms1000watt/jenkins-docker:latest
     ports:
     - 8080:8080

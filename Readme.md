@@ -9,13 +9,14 @@ Hello World to Jenkins in Docker with pipelines
 - [Build](#build)
 - [Usage](#usage)
 - [CLI](#cli)
+- [TODO](#todo)
 
 ## Build
 
-Build the specialized Jenkins docker image (with docker bin)
+Build the specialized Jenkins docker image (with docker bin inside) & DCinD docker image (with git bin inside)
 
 ```bash
-docker build  --force-rm --no-cache --compress -t rms1000watt/jenkins-docker:latest .
+./build.sh
 ```
 
 ## Usage
@@ -59,3 +60,7 @@ curl http://$IP_ADDRESS:8080/jnlpJars/jenkins-cli.jar > jenkins-cli.jar
 # List plugins
 java -jar jenkins-cli.jar -s http://$IP_ADDRESS:8080/ -auth admin:$ADMIN_TOKEN list-plugins
 ```
+
+## TODO
+
+- [ ] Consider not creating a `dcind` image and just installing `git` every run

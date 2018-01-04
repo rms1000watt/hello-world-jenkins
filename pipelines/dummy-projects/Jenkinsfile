@@ -11,7 +11,7 @@ pipeline {
                 stage('Build NodeJS') { 
                     steps {
                         sh("source /docker-lib.sh && \
-                            start_docker && \
+                            (start_docker || true) && \
                             rm -rf dummy-nodejs-project && \
                             git clone https://github.com/rms1000watt/dummy-nodejs-project.git && \
                             cd dummy-nodejs-project && \
@@ -21,7 +21,7 @@ pipeline {
                 stage('Build Golang') { 
                     steps {
                         sh("source /docker-lib.sh && \
-                            start_docker && \
+                            (start_docker || true) && \
                             rm -rf dummy-golang-project && \
                             git clone https://github.com/rms1000watt/dummy-golang-project.git && \
                             cd dummy-golang-project && \

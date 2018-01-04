@@ -10,7 +10,9 @@ pipeline {
             parallel {
                 stage('Build NodeJS') { 
                     steps {
-                        sh("rm -rf dummy-nodejs-project && \
+                        sh("source /docker-lib.sh && \
+                            start_docker && \
+                            rm -rf dummy-nodejs-project && \
                             git clone https://github.com/rms1000watt/dummy-nodejs-project.git && \
                             cd dummy-nodejs-project && \
                             ./build.sh")
@@ -18,7 +20,9 @@ pipeline {
                 }
                 stage('Build Golang') { 
                     steps {
-                        sh("rm -rf dummy-golang-project && \
+                        sh("source /docker-lib.sh && \
+                            start_docker && \
+                            rm -rf dummy-golang-project && \
                             git clone https://github.com/rms1000watt/dummy-golang-project.git && \
                             cd dummy-golang-project && \
                             ./build.sh")

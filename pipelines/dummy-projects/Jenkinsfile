@@ -2,6 +2,7 @@ pipeline {
     agent {
         docker {
             image 'rms1000watt/dcind-git:latest'
+            args '--name dcind-git'
         }
     }
     stages {

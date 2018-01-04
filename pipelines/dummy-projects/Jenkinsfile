@@ -35,7 +35,7 @@ pipeline {
                     docker-compose up -d && \
                     docker images && \
                     docker ps && \
-                    sleep 5 && \
+                    sleep 60 && \
                     ./test.sh && \
                     docker-compose down")
             }

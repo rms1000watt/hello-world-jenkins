@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image 'rms1000watt/dcind-git:latest'
-            // args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
     stages {
@@ -10,74 +9,42 @@ pipeline {
             parallel {
                 stage('Build NodeJS') { 
                     steps {
-                        // sh("source /docker-lib.sh && \
-                        //     (start_docker || true) && \
-                        //     rm -rf dummy-nodejs-project && \
-                        //     git clone https://github.com/rms1000watt/dummy-nodejs-project.git && \
-                        //     cd dummy-nodejs-project && \
-                        //     ./build.sh")
-                        sh('''
-                            rm -rf dummy-nodejs-project
-                            git clone https://github.com/rms1000watt/dummy-nodejs-project.git
-                            cd dummy-nodejs-project
-                            ./build.sh
-                            ''')
+                        sh("rm -rf dummy-nodejs-project && \
+                            git clone https://github.com/rms1000watt/dummy-nodejs-project.git && \
+                            cd dummy-nodejs-project && \
+                            ./build.sh")
                     }
                 }
-                // stage('Build Golang') { 
-                //     steps {
-                //         sh("source /docker-lib.sh && \
-                //             (start_docker || true) && \
-                //             rm -rf dummy-golang-project && \
-                //             git clone https://github.com/rms1000watt/dummy-golang-project.git && \
-                //             cd dummy-golang-project && \
-                //             ./build.sh")
-                //     }
-                // }
+                stage('Build Golang') { 
+                    steps {
+                        sh("rm -rf dummy-golang-project && \
+                            git clone https://github.com/rms1000watt/dummy-golang-project.git && \
+                            cd dummy-golang-project && \
+                            ./build.sh")
+                    }
+                }
             }
         }
-        // stage('Integration Test') { 
-        //     steps {
-        //         sh("rm -rf dummy-projects-integration && \
-        //             git clone https://github.com/rms1000watt/dummy-projects-integration.git && \
-        //             cd dummy-projects-integration && \
-        //             cat docker-compose.yml && \
-        //             docker-compose up -d && \
-        //             docker images && \
-        //             docker ps && \
-        //             sleep 5 && \
-        //             ./test.sh && \
-        //             docker-compose down")
-        //     }
-        // }
-        // stage('Push Containers') {
-        //     steps {
-        //         sh("echo 'These will fail because not logged in' && \
-        //             docker push rms1000watt/dummy-nodejs-project:latest && \
-        //             docker push rms1000watt/dummy-golang-project:latest")
-        //     }
-        // }
+        stage('Integration Test') { 
+            steps {
+                sh("rm -rf dummy-projects-integration && \
+                    git clone https://github.com/rms1000watt/dummy-projects-integration.git && \
+                    cd dummy-projects-integration && \
+                    cat docker-compose.yml && \
+                    docker-compose up -d && \
+                    docker images && \
+                    docker ps && \
+                    sleep 5 && \
+                    ./test.sh && \
+                    docker-compose down")
+            }
+        }
+        stage('Push Containers') {
+            steps {
+                sh("echo 'These will fail because not logged in' && \
+                    docker push rms1000watt/dummy-nodejs-project:latest && \
+                    docker push rms1000watt/dummy-golang-project:latest")
+            }
+        }
     }
-
-    // agent {
-    //     docker {
-    //         image 'rms1000watt/dcind-git:latest'
-    //     }
-    // }
-    // stages {
-    //     stage('Integration Test') { 
-    //         steps {
-    //             sh("rm -rf dummy-projects-integration && \
-    //                 git clone https://github.com/rms1000watt/dummy-projects-integration.git && \
-    //                 cd dummy-projects-integration && \
-    //                 cat docker-compose.yml && \
-    //                 docker-compose up -d && \
-    //                 docker images && \
-    //                 docker ps && \
-    //                 sleep 5 && \
-    //                 ./test.sh && \
-    //                 docker-compose down")
-    //         }
-    //     }
-    // }
 }

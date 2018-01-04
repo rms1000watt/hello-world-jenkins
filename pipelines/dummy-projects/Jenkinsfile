@@ -17,8 +17,6 @@ pipeline {
                         //     cd dummy-nodejs-project && \
                         //     ./build.sh")
                         sh('''
-                            # source /docker-lib.sh
-                            # start_docker || true
                             rm -rf dummy-nodejs-project
                             git clone https://github.com/rms1000watt/dummy-nodejs-project.git
                             cd dummy-nodejs-project

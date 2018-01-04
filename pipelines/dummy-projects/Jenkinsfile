@@ -6,8 +6,8 @@ pipeline {
         }
     }
     stages {
-        parallel {
-            stages {
+        stage('Build Containers') {
+            parallel {
                 stage('Build NodeJS') { 
                     steps {
                         sh("rm -rf dummy-nodejs-project && \

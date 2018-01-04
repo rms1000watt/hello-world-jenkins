@@ -22,6 +22,35 @@ pipeline {
                     ./build.sh")
             }
         }
+        // stage('Integration Test') { 
+        //     steps {
+        //         sh("rm -rf dummy-projects-integration && \
+        //             git clone https://github.com/rms1000watt/dummy-projects-integration.git && \
+        //             cd dummy-projects-integration && \
+        //             cat docker-compose.yml && \
+        //             docker-compose up -d && \
+        //             docker images && \
+        //             docker ps && \
+        //             sleep 5 && \
+        //             ./test.sh && \
+        //             docker-compose down")
+        //     }
+        // }
+        // stage('Push Containers') {
+        //     steps {
+        //         sh("echo 'These will fail because not logged in' && \
+        //             docker push rms1000watt/dummy-nodejs-project:latest && \
+        //             docker push rms1000watt/dummy-golang-project:latest")
+        //     }
+        // }
+    }
+
+    agent {
+        docker {
+            image 'rms1000watt/dcind-git:latest'
+        }
+    }
+    stages {
         stage('Integration Test') { 
             steps {
                 sh("rm -rf dummy-projects-integration && \
@@ -32,14 +61,8 @@ pipeline {
                     docker images && \
                     docker ps && \
                     sleep 5 && \
-                    ./test.sh")
-                    // docker-compose down")
-            }
-        }
-        stage('Push Containers') {
-            steps {
-                sh("docker push rms1000watt/dummy-nodejs-project:latest && \
-                    docker push rms1000watt/dummy-golang-project:latest")
+                    ./test.sh && \
+                    docker-compose down")
             }
         }
     }

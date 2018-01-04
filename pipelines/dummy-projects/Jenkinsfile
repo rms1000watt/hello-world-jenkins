@@ -35,8 +35,8 @@ pipeline {
                     docker-compose up -d && \
                     docker images && \
                     docker ps && \
-                    sleep 60 && \
-                    ./test.sh && \
+                    sleep 5 && \
+                    HOST_ADDRESS=10.10.7.125 ./test.sh && \
                     docker-compose down")
             }
         }

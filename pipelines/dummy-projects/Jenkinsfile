@@ -27,8 +27,6 @@ pipeline {
                 sh("rm -rf dummy-projects-integration && \
                     git clone https://github.com/rms1000watt/dummy-projects-integration.git && \
                     cd dummy-projects-integration && \
-                    source /docker-lib.sh && \
-                    start_docker && \
                     cat docker-compose.yml && \
                     docker-compose up -d && \
                     docker images && \

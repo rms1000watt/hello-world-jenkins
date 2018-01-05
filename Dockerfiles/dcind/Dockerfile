@@ -1,2 +1,2 @@
 FROM amidos/dcind:latest
-RUN apk add --no-cache git
+RUN apk add --no-cache git make

@@ -1,2 +1,2 @@
 FROM amidos/dcind:latest
-RUN apk add --no-cache git make openssh
+RUN apk add --no-cache git make
